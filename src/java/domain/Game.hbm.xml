@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-09-21 11:06:30 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="domain.Game" table="game" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="gameStatus" class="domain.GameStatus" fetch="select">
+            <column name="game_status" not-null="true" />
+        </many-to-one>
+        <property name="whiteKey" type="string">
+            <column name="white_key" length="50" not-null="true" />
+        </property>
+        <property name="blackKey" type="string">
+            <column name="black_key" length="50" not-null="true" />
+        </property>
+        <property name="whiteTime" type="java.lang.Long">
+            <column name="white_time" />
+        </property>
+        <property name="blackTime" type="java.lang.Long">
+            <column name="black_time" />
+        </property>
+        <property name="onMove" type="java.lang.Boolean">
+            <column name="on_move" />
+        </property>
+        <property name="gameKey" type="string">
+            <column name="game_key" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="created_on" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>
