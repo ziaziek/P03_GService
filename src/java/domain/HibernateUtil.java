@@ -8,7 +8,9 @@ package domain;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.slf4j.LoggerFactory;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -41,5 +43,19 @@ public class HibernateUtil {
         List r = s.createQuery(qry).list();
         s.close();
         return r;
+    }
+    
+    public static void save(final Object obj){
+        Session s = sessionFactory.openSession();
+        Transaction tx = s.beginTransaction();
+        try {
+            s.saveOrUpdate(obj);
+            tx.commit();
+            LoggerFactory.getLogger("HibernateUtils").info("Saving object "+obj.getClass().getName());
+        } catch(Exception ex){
+            tx.rollback();
+            LoggerFactory.getLogger(tx.getClass()).warn(ex.getMessage());
+        }
+        s.close();
     }
 }

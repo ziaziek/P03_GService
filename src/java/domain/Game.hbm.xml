@@ -15,7 +15,7 @@
             <column name="white_key" length="50" not-null="true" />
         </property>
         <property name="blackKey" type="string">
-            <column name="black_key" length="50" not-null="true" />
+            <column name="black_key" length="50" />
         </property>
         <property name="whiteTime" type="java.lang.Long">
             <column name="white_time" />
