@@ -51,7 +51,6 @@ public class HibernateUtil {
         try {
             s.saveOrUpdate(obj);
             tx.commit();
-            LoggerFactory.getLogger("HibernateUtils").info("Saving object "+obj.getClass().getName());
         } catch(Exception ex){
             tx.rollback();
             LoggerFactory.getLogger(tx.getClass()).warn(ex.getMessage());
